@@ -13,3 +13,9 @@ ports:
 vscode:
   extensions:
     - fivethree.vscode-svelte-snippets
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
