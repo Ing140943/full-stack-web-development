@@ -78,12 +78,16 @@ import TodoItem from "$lib/todo-items.svelte";
 <div class="todos">
     <h1>{title}</h1>
 
-    <form action="/todos.json" method="post" class="new" use:enhance>
-        <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo"/>
-    </form>
+    <form action="/todos.json" method="post" class="new" use:enhance={{
+        result: processNewTodoResult
+      }}>
+        <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
+      </form>
     
     {#each todos as todo}
-        <TodoItem {todo}/>
+    <TodoItem {todo} processDeletedTodoResult={() => {
+      todos = todos.filter(t => t.uid !== todo.uid);
+    }} {processUpdatedTodoResult} />
     {/each}
     
 </div>
